@@ -1,0 +1,72 @@
+tasks
+  0
+  120
+  121
+
+! compute the xx, yy, and zz components
+optcomp
+  1  1
+  2  2
+  3  3
+
+wplot
+  1000  500  0
+  22.0  24.0
+
+spinorb
+  .true.
+
+spinpol
+  .true.
+
+rotavec
+  0.8629 0.3574 0.3574 261.58
+
+! use GGA
+xctype
+  20
+
+highq
+  .true.
+
+mixtype
+  3
+
+broydpm
+  0.4 0.15
+
+lmaxvr
+  7
+
+nempty
+  20
+
+! a Lorentzian broadening is applied to the spectrum
+swidth
+  0.01
+
+avec
+  -1.0  1.0  2.5658
+  1.0  -1.0  2.5658
+  1.0  1.0   -2.5658
+ 
+scale
+  3.1445
+
+atoms
+  2                                   : nspecies
+  'Mn_lo.in'                             : spfname
+  2                                   : natoms
+  0.333333  0.333333  0.0    0.0  0.0  2.0      : atposl, bfcmt
+  0.666666  0.666666  0.0    0.0  0.0  -2.0      : atposl, bfcmt
+  'Au.in'
+  1
+  0.0  0.0  0.0    0.0  0.0  0.0      : atposl, bfcmt
+
+! the large magnetic local field on Ni is halved at every iteration
+! this speeds up the convergence of magnetic calculations
+reducebf
+  0.8
+
+sppath
+  '../species/'
