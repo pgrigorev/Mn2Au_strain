@@ -25,7 +25,12 @@ if __name__ == '__main__':
     cubic_unit_cell.wrap()
 
 
-    VaspCalc = Vasp(npar=n_par, kpts=[3,3,3],
+    VaspCalc = Vasp(npar=npar, kpts=[9, 9, 3], # nupdown=0.0,
+                    # amix=0.2,
+                    # bmix=0.0001,
+                    # amix_mag=0.8,
+                    # bmix_mag=0.0001,
+                    lorbit=11,
                     istart=0, # start from scratch
                     icharg=2, # default for istart=0
                     isif=2,
@@ -41,9 +46,19 @@ if __name__ == '__main__':
                     ismear=1,
                     sigma=0.1,
                     ispin=2, # spin polarised calculation
-                    magmom=[0.0, 2.0, -2.0, 0.0, 2.0, -2.0], # a first guess for the Mn2Au
+                    magmom=[-3.0, 3.0, 3.0, -3.0, 0.0, 0.0], # a first guess for the Mn2Au the order of atoms in VASP is bizarre 
                     xc='PBE')
 
     cubic_unit_cell.calc = VaspCalc
     energy = cubic_unit_cell.get_potential_energy()
     print(f"Cubic cell enrgy: {energy}")
+    print(f"Energy per atom: {energy/len(cubic_unit_cell)}")
+    print("Forces")
+    print(cubic_unit_cell.get_forces())
+    print("Stress")
+    print(cubic_unit_cell.get_stress())
+    print("Total magnetic moment")
+    print(cubic_unit_cell.get_magnetic_moment())
+    print("Magnetic moments:")
+    print(cubic_unit_cell.get_magnetic_moments())
+
