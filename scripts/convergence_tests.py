@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     npar = int(os.environ["SLURM_NNODES"])
 
-    n_kpts_values = [1, 2, 3, 4, 5, 6, 7, 8, 10, 15]
+    n_kpts_values = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 15, 19]
 
     primitive_unit_cell = make_primitive_Mn2Au_cell(alat, factor)
 
