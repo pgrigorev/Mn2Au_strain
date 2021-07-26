@@ -72,7 +72,7 @@ if __name__ == '__main__':
         print(primitive_unit_cell.get_magnetic_moments())
 
         dataframe = dataframe.append({"kpts" : n_kpts,
-                                      "energy" : emergy,
+                                      "energy" : energy,
                                       "total_magmom" : primitive_unit_cell.get_magnetic_moment()
                                           }, ignore_index=True)
 
@@ -120,7 +120,7 @@ if __name__ == '__main__':
             print(primitive_unit_cell.get_magnetic_moments())
 
             dataframe = dataframe.append({"encut" : encut,
-                                          "energy" : emergy,
+                                          "energy" : energy,
                                           "total_magmom" : primitive_unit_cell.get_magnetic_moment()
                                               }, ignore_index=True)
 
