@@ -28,7 +28,8 @@ if __name__ == '__main__':
 
     primitive_unit_cell = make_primitive_Mn2Au_cell(alat, factor)
 
-    if not os.path.exists("conv_files")
+    if not os.path.exists("conv_files"):
+        os.mkdir("conv_files")
 
     dataframe = pd.DataFrame()
 
