@@ -27,13 +27,13 @@ if __name__ == '__main__':
 
     VaspCalc = VaspInteractive(npar=npar,
                                lorbit=11,
-                               kpts=[10, 10, 10],
+                               kpts=[11, 11, 11],
                                istart=0, # start from scratch
                                icharg=2, # default for istart=0
                                isif=2,
                                nsim=2,
                                prec='Accurate',
-                               encut=600,
+                               encut=500,
                                ediff=1.e-6,
                                nelm=200,
                                nelmin=5,
