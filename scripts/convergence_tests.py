@@ -71,7 +71,7 @@ if __name__ == '__main__':
         print("Magnetic moments:")
         print(primitive_unit_cell.get_magnetic_moments())
 
-        dataframe = dataframe.append({"kpts" : kpts,
+        dataframe = dataframe.append({"kpts" : n_kpts,
                                       "energy" : emergy,
                                       "total_magmom" : primitive_unit_cell.get_magnetic_moment()
                                           }, ignore_index=True)
