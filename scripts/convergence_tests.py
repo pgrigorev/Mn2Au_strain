@@ -81,48 +81,48 @@ if __name__ == '__main__':
 
         encut_values = [100, 200, 300, 400, 500, 600, 700, 800]
 
-        for encut in n_kpts_values:
+    for encut in encut_values:
 
-            print(f"Using cutof {encut} eV")
+        print(f"Using cutof {encut} eV")
 
-            VaspCalc = Vasp(npar=npar,
-                            lorbit=11,
-                            kpts=[6, 6, 6],
-                            istart=0, # start from scratch
-                            icharg=2, # default for istart=0
-                            isif=2,
-                            nsim=2,
-                            prec='Accurate',
-                            encut=encut,
-                            ediff=1.e-6,
-                            nelm=200,
-                            nelmin=5,
-                            algo="Normal",
-                            isym=0,
-                            ismear=1,
-                            sigma=0.1,
-                            ispin=2, # spin polarised calculation
-                            magmom=[0.0, -3.0, 3.0], # a first guess for the Mn2Au
-                            xc='PBE')
+        VaspCalc = Vasp(npar=npar,
+                        lorbit=11,
+                        kpts=[6, 6, 6],
+                        istart=0, # start from scratch
+                        icharg=2, # default for istart=0
+                        isif=2,
+                        nsim=2,
+                        prec='Accurate',
+                        encut=encut,
+                        ediff=1.e-6,
+                        nelm=200,
+                        nelmin=5,
+                        algo="Normal",
+                        isym=0,
+                        ismear=1,
+                        sigma=0.1,
+                        ispin=2, # spin polarised calculation
+                        magmom=[0.0, -3.0, 3.0], # a first guess for the Mn2Au
+                        xc='PBE')
 
 
-            primitive_unit_cell.calc = VaspCalc
-            energy = primitive_unit_cell.get_potential_energy()
-            print(energy)
-            print(f"Energy per atom: {energy/len(primitive_unit_cell)}")
-            print("Forces")
-            print(primitive_unit_cell.get_forces())
-            print("Stress")
-            print(primitive_unit_cell.get_stress())
-            print("Total magnetic moment")
-            print(primitive_unit_cell.get_magnetic_moment())
-            print("Magnetic moments:")
-            print(primitive_unit_cell.get_magnetic_moments())
+        primitive_unit_cell.calc = VaspCalc
+        energy = primitive_unit_cell.get_potential_energy()
+        print(energy)
+        print(f"Energy per atom: {energy/len(primitive_unit_cell)}")
+        print("Forces")
+        print(primitive_unit_cell.get_forces())
+        print("Stress")
+        print(primitive_unit_cell.get_stress())
+        print("Total magnetic moment")
+        print(primitive_unit_cell.get_magnetic_moment())
+        print("Magnetic moments:")
+        print(primitive_unit_cell.get_magnetic_moments())
 
-            dataframe = dataframe.append({"encut" : encut,
-                                          "energy" : energy,
-                                          "total_magmom" : primitive_unit_cell.get_magnetic_moment()
-                                              }, ignore_index=True)
+        dataframe = dataframe.append({"encut" : encut,
+                                      "energy" : energy,
+                                      "total_magmom" : primitive_unit_cell.get_magnetic_moment()
+                                          }, ignore_index=True)
 
-            dataframe.to_csv(f"encut_conv_results.csv")
-            primitive_unit_cell.write(f"conv_files/{encut}_encut_results.xyz")
+        dataframe.to_csv(f"encut_conv_results.csv")
+        primitive_unit_cell.write(f"conv_files/{encut}_encut_results.xyz")
