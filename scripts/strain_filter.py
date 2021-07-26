@@ -4,6 +4,7 @@ from ase import Atoms
 from ase.calculators.vasp import VaspInteractive
 
 from ase.constraints import StrainFilter
+from from ase.optimize import FIRE
 
 def make_primitive_Mn2Au_cell(alat, factor):
 
@@ -33,7 +34,7 @@ if __name__ == '__main__':
                                isif=2,
                                nsim=2,
                                prec='Accurate',
-                               encut=500,
+                               encut=600,
                                ediff=1.e-6,
                                nelm=200,
                                nelmin=5,
