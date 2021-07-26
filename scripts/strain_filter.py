@@ -1,7 +1,7 @@
 import os
 
 from ase import Atoms
-from ase.calculators.vasp import Vasp
+from ase.calculators.vasp import VaspInteractive
 
 from ase.constraints import StrainFilter
 
@@ -19,31 +19,31 @@ def make_primitive_Mn2Au_cell(alat, factor):
 
 if __name__ == '__main__':
 
-    # initial guesses from the paper    
+    # initial guesses from the paper
     alat = 3.1445
     factor = 2.5658
 
     npar = int(os.environ["SLURM_NNODES"])
 
-    VaspCalc = Vasp(npar=npar,
-                    lorbit=11,
-                    kpts=[6, 6, 6],
-                    istart=0, # start from scratch
-                    icharg=2, # default for istart=0
-                    isif=2,
-                    nsim=2,
-                    prec='Accurate',
-                    encut=500,
-                    ediff=1.e-6,
-                    nelm=200,
-                    nelmin=5,
-                    algo="Normal",
-                    isym=0,
-                    ismear=1,
-                    sigma=0.1,
-                    ispin=2, # spin polarised calculation
-                    magmom=[0.0, -3.0, 3.0], # a first guess for the Mn2Au
-                    xc='PBE')
+    VaspCalc = VaspInteractive(npar=npar,
+                               lorbit=11,
+                               kpts=[10, 10, 10],
+                               istart=0, # start from scratch
+                               icharg=2, # default for istart=0
+                               isif=2,
+                               nsim=2,
+                               prec='Accurate',
+                               encut=600,
+                               ediff=1.e-6,
+                               nelm=200,
+                               nelmin=5,
+                               algo="Normal",
+                               isym=0,
+                               ismear=1,
+                               sigma=0.1,
+                               ispin=2, # spin polarised calculation
+                               magmom=[0.0, -3.0, 3.0], # a first guess for the Mn2Au
+                               xc='PBE')
 
     primitive_unit_cell = make_primitive_Mn2Au_cell(alat, factor)
     primitive_unit_cell.calc = VaspCalc
@@ -58,3 +58,18 @@ if __name__ == '__main__':
 
     print("After strain filter")
     print(primitive_unit_cell.cell.get_bravais_lattice())
+
+    energy = primitive_unit_cell.get_potential_energy()
+    print(energy)
+    print(f"Energy per atom: {energy/len(primitive_unit_cell)}")
+    print("Forces")
+    print(primitive_unit_cell.get_forces())
+    print("Stress")
+    print(primitive_unit_cell.get_stress())
+    print("Total magnetic moment")
+    print(primitive_unit_cell.get_magnetic_moment())
+    print("Magnetic moments:")
+    print(primitive_unit_cell.get_magnetic_moments())
+
+
+    primitive_unit_cell.wrte("strain_filtered_unit_cell.xyz")
