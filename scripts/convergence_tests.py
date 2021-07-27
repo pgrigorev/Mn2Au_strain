@@ -43,7 +43,7 @@ if __name__ == '__main__':
                         istart=0, # start from scratch
                         icharg=2, # default for istart=0
                         isif=2,
-                        nsim=2,
+                        # nsim=2,
                         prec='Accurate',
                         encut=300,
                         ediff=1.e-6,
@@ -81,6 +81,7 @@ if __name__ == '__main__':
 
         encut_values = [100, 200, 300, 400, 500, 600, 700, 800]
 
+    dataframe = pd.DataFrame()
     for encut in encut_values:
 
         print(f"Using cutof {encut} eV")
