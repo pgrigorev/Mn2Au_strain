@@ -17,21 +17,21 @@ if __name__ == '__main__':
                  "magnetic_001" : {"ispin": 2, # spin polarised calculation
                                    "magmom" : [0.0, -3.0, 3.0]}, # a first guess for the Mn2}
                  "magnetic_1-10" : {"ispin": 2,
-                                   "LNONCOLLINEAR": True,
+                                   "lnoncollinear": True,
                                    "magmom" : [[0.0, 0.0, 0.0],
-                                               [-3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
+                                              [-3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
                                                [3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]]},
                  "magnetic_110" : {"ispin": 2,
-                                   "LNONCOLLINEAR": True,
+                                   "lnoncollinear": True,
                                    "magmom" : [[0.0, 0.0, 0.0],
                                                [3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
                                                [-3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]]}}
 
-    for name, kwargs in arguments.iteritems():
-
+    for name, kwargs in arguments.items():
+        print(kwargs)
         VaspCalc = Vasp(npar=npar,
                         lorbit=11,
-                        kpts=[6, 6, 6],
+                        kpts=[11, 11, 11],
                         istart=0, # start from scratch
                         icharg=2, # default for istart=0
                         isif=2,
@@ -45,7 +45,7 @@ if __name__ == '__main__':
                         isym=0,
                         ismear=1,
                         sigma=0.1,
-                        xc='PBE'
+                        xc='PBE',
                         **kwargs)
 
         primitive_unit_cell = read("strain_filtered_unit_cell.xyz")
