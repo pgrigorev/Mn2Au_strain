@@ -14,21 +14,28 @@ if __name__ == '__main__':
     npar = int(os.environ["SLURM_NNODES"])
 
     arguments = {"non_magnetic" : {"ispin": 1},
-                 "magnetic_001" : {"ispin": 2, # spin polarised calculation
-                                   "magmom" : [0.0, -3.0, 3.0]}, # a first guess for the Mn2}
+                 "magnetic_001" : {"ispin": 2}, # spin polarised calculation
                  "magnetic_1-10" : {"ispin": 2,
-                                   "lnoncollinear": True,
-                                   "magmom" : [[0.0, 0.0, 0.0],
-                                              [-3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
-                                               [3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]]},
+                                    "lnoncollinear": True},
                  "magnetic_110" : {"ispin": 2,
-                                   "lnoncollinear": True,
-                                   "magmom" : [[0.0, 0.0, 0.0],
-                                               [3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
-                                               [-3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]]}}
+                                   "lnoncollinear": True}}
+
+
+    magmoms = {"magnetic_001" : [0.0, -3.0, 3.0], # a first guess for the Mn2}
+               "magnetic_1-10" :  np.array([[0.0, 0.0, 0.0],
+                                            [-3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
+                                            [3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]]),
+                 "magnetic_110" :  np.array([[0.0, 0.0, 0.0],
+                                            [3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
+                                            [-3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]])}
+
 
     for name, kwargs in arguments.items():
         print(kwargs)
+        primitive_unit_cell = read("strain_filtered_unit_cell.xyz")
+        if kwargs['ispin'] == 2
+            primitive_unit_cell.set_initial_magnetic_moments(magmoms[name])
+
         VaspCalc = Vasp(npar=npar,
                         lorbit=11,
                         kpts=[11, 11, 11],
@@ -48,7 +55,7 @@ if __name__ == '__main__':
                         xc='PBE',
                         **kwargs)
 
-        primitive_unit_cell = read("strain_filtered_unit_cell.xyz")
+
         primitive_unit_cell.calc = VaspCalc
         energy = primitive_unit_cell.get_potential_energy()
         print(f"Evaluation results with {name}")
