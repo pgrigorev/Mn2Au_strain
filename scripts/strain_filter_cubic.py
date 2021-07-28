@@ -1,5 +1,7 @@
 import os
 
+from ase.lattice.tetragonal import CenteredTetragonalFactory
+
 from ase import Atoms
 from ase.calculators.vasp import Vasp
 
