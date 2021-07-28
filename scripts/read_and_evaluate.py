@@ -20,12 +20,12 @@ if __name__ == '__main__':
                                    "LNONCOLLINEAR": True,
                                    "magmom" : [[0.0, 0.0, 0.0],
                                                [-3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
-                                               [3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]},
+                                               [3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]]},
                  "magnetic_110" : {"ispin": 2,
                                    "LNONCOLLINEAR": True,
                                    "magmom" : [[0.0, 0.0, 0.0],
                                                [3.0 / np.sqrt(2.0), 3.0 / np.sqrt(2.0), 0.0],
-                                               [-3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]}}
+                                               [-3.0 / np.sqrt(2.0), -3.0 / np.sqrt(2.0), 0.0]]}}
 
     for name, kwargs in arguments.iteritems():
 
