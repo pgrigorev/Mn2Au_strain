@@ -1,12 +1,14 @@
 import os
 
+import numpy as np
+
 from ase import Atoms
 from ase.calculators.vasp import Vasp
-
+from ase.io import read
 
 if __name__ == '__main__':
 
-    primitive_unit_cell.read("strain_filtered_unit_cell.xyz")
+    primitive_unit_cell = read("strain_filtered_unit_cell.xyz")
     print("Old Values")
     print(primitive_unit_cell.cell.get_bravais_lattice())
 
@@ -24,12 +26,15 @@ if __name__ == '__main__':
     print(primitive_unit_cell.cell)
 
     npar = int(os.environ["SLURM_NNODES"])
-
+    moments = np.array([[0., 0., 0.],
+                        [0., 0., -3.5],
+                        [0., 0., 3.5]])
+    primitive_unit_cell.set_initial_magnetic_moments(moments)
     VaspCalc = Vasp(npar=npar,
                     lorbit=11,
                     kpts=[11, 11, 11],
-                    istart=1, # read wavecar
-                    icharg=2, # default for istart=0
+                    istart=2, # start from scratch
+                    # icharg=2, # default for istart=0
                     isif=2,
                     # nsim=2,
                     prec='Accurate',
@@ -43,6 +48,7 @@ if __name__ == '__main__':
                     sigma=0.1,
                     ispin=2, # spin polarised calculation
                     lsorbit=True, # spin orbit coupling
+                    saxis=[0, 0, 1],
                     xc='PBE')
 
     primitive_unit_cell.calc = VaspCalc
