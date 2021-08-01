@@ -39,7 +39,7 @@ if __name__ == '__main__':
                     nelm=200,
                     nelmin=5,
                     algo="Normal",
-                    isym=0,
+                    isym=-1,
                     ismear=1,
                     sigma=0.1,
                     ispin=2, # spin polarised calculation
