@@ -37,7 +37,7 @@ if __name__ == '__main__':
                         lorbit=11,
                         kpts=[11, 11, 11],
                         istart=1, # read collinear wavecar
-                        icharg=11, # non self consistent
+                        # icharg=0, # non self consistent
                         isif=2,
                         # nsim=2,
                         lmaxmix=4,
