@@ -58,6 +58,3 @@ $b_3 = - 2 C_{66} \lambda^{\sigma, 2}$, thus we get $b_3$ = 4.8 MPa.
 ![image](conv_forces.png)
     - stress
 ![image](conv_stress.png)
-
-# TODO:
-- add zoomed in magnetostriction plot
