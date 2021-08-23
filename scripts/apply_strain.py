@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
 
     strains = [-0.02, -0.015,  -0.01, -5e-3,
-               0.0, 
+               0.0,
                5e-3, 0.01, 0.015, 0.02]
     if os.path.exists("strain_results.csv"):
         results = pd.read_csv("strain_results.csv", index_col=0)
@@ -39,12 +39,18 @@ if __name__ == '__main__':
 
         configuration = primitive_unit_cell.copy()
         cell = configuration.cell.copy()
+
+        # [110] strain
+        # cell[2][0] += strain * primitive_unit_cell.cell[2][0] / np.sqrt(2.0)
+        # cell[2][1] += strain * primitive_unit_cell.cell[2][1] / np.sqrt(2.0)
+
+        # [-110] strain
         cell[0][0] += strain * primitive_unit_cell.cell[0][0] / np.sqrt(2.0)
         cell[0][1] += strain * primitive_unit_cell.cell[0][1] / np.sqrt(2.0)
         cell[1][0] += strain * primitive_unit_cell.cell[1][0] / np.sqrt(2.0)
         cell[1][1] += strain * primitive_unit_cell.cell[1][1] / np.sqrt(2.0)
         configuration.set_cell(cell, scale_atoms=False)
-        
+
         VaspSTD = Vasp(npar=npar,
                         kpar=10,
                         lorbit=11,
