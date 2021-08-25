@@ -1,0 +1,14 @@
+### Density Functional Theory Calculations
+
+Viena ab-initio simulation package (VASP) [citation](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.54.11169) was used to describe electron exchange and correlation within Perdew-Burke-Ernzerhof (PBE) generalized gradient approximation together with Projector Augmented Wave (PAW) [citation](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.77.3865) basis set with cut-off energy of 600 eV.
+The Brillion zone was sampled with 25x25x25 Monkhorst-Pack k-point grid.  The values of these parameters were chosen after a series of convergence tests on forces with a tolerance of few meV/Angstom.
+Firstly the equilibrium parameters unit cell where determined by minimizing the stress with respect with the unit cell parameters. For this stage the occupancies were smeared with a Methfessel-Paxton scheme of order one with a 0.1 eV smearing width. The minimized unite cell represents Centered Tetragonal structure with lattice parameters a = 3.27929 Angstrom and c = 8.43087 Angstrom. The cell has zero total magnetization with Au atoms carying zero moment and plus/minus 3.55 muB for Mn atoms. The atomic positions were then relaxed with the tolerance of maximum force of 0.001 eV/Angstom. The elastic constants were calculated by fitting stress-strain dependence for a number of strained configurations giving the following values: C11 = 138 GPa, C12 = 126 GPa, C13 = 75 GPa, C33=232 GPa, C44 =82 GPa, C66 = 110 GPa.
+
+For calculations of magnetic anisotropy spin-orbit coupling is taken into account and tetrahedron method with Blöchl corrections for smearing was used instead of Methfessel-Paxton scheme.
+Electronic energy minimisation convergence criterion was set to 10^-9 eV.  For this stage the energy convergence of few microeV with respect to k-points and energy cut-off was achieved.
+Energy difference between configurations with magnetic moments oriented
+The number unit cells strained along [001] and [110] direction is 2.55 meV and is in perfect agreement with values reported in [citation](https://journals.aps.org/prb/abstract/10.1103/PhysRevB.81.212409).
+
+The energy difference between configuration with magnetic moments oriented along [-110] direction E(-110) and [110] direction E(110) where obtained for a number of cells strained along [110] direction. Positive values of $\mathrm{\Delta E= E(-110) - E(110)} $ indicates that configurations with magnetic moments oriented along [110] directions are more stable, negative value - configurations with [-110] are more stable. Linear fit resulted in the -0.0092 meV per one percent of magnetic anisotropy due to strain along {110} directions as can be seen from the figure.
+
+Magnetostriction coefficient $\mathrm{\lambda^{\sigma, 2}=-23.38 x 10^{-6}}$ as well as magnetoelastic coefficient $b_3$ = 5.1 MPa were also obtained with the procedure described in detail in [citation](https://arxiv.org/abs/2009.01638).
